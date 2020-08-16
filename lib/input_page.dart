@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'reusable_card.dart';
+import 'icon_content.dart';
+
+const bottomContainerHeight = 63.0;
+const activeCardColour = Color(0xFF1D1E33);
+const bottomContainerColor = Color(0xFFEB1555);
 
 class InputPage extends StatefulWidget {
   @override
@@ -22,15 +29,33 @@ class _InputPageState extends State<InputPage> {
       body: Column(children: <Widget>[
         Expanded(
             child: Row(children: <Widget>[
-          Expanded(child: ReusableCard(colour: Color(0xFF1D1E33))),
-          Expanded(child: ReusableCard(colour: Color(0xFF1D1E33))),
+          Expanded(
+              child: GestureDetector(
+            onTap: () {
+              print('tapped');
+            },
+            child: ReusableCard(
+                colour: activeCardColour,
+                cardChild:
+                    IconContent(label: 'MALE', icon: FontAwesomeIcons.mars)),
+          )),
+          Expanded(
+              child: ReusableCard(
+                  colour: activeCardColour,
+                  cardChild: IconContent(
+                      label: 'FEMALE', icon: FontAwesomeIcons.venus))),
         ])),
-        Expanded(child: ReusableCard(colour: Color(0xFF1D1E33))),
+        Expanded(child: ReusableCard(colour: activeCardColour)),
         Expanded(
             child: Row(children: <Widget>[
-          Expanded(child: ReusableCard(colour: Color(0xFF1D1E33))),
-          Expanded(child: ReusableCard(colour: Color(0xFF1D1E33))),
+          Expanded(child: ReusableCard(colour: activeCardColour)),
+          Expanded(child: ReusableCard(colour: activeCardColour)),
         ])),
+        Container(
+            width: double.infinity,
+            color: bottomContainerColor,
+            margin: EdgeInsets.only(top: 10),
+            height: bottomContainerHeight)
       ]),
       // ignore: missing_required_param
       // floatingActionButton: Theme(
@@ -39,21 +64,6 @@ class _InputPageState extends State<InputPage> {
       //     child: Icon(Icons.add, color: Color(0xFF0A0E21)),
       //   ),
       // ),
-    );
-  }
-}
-
-class ReusableCard extends StatelessWidget {
-  Color colour;
-
-  ReusableCard({@required this.colour});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(15),
-      decoration:
-          BoxDecoration(color: colour, borderRadius: BorderRadius.circular(10)),
     );
   }
 }
